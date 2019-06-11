@@ -1,6 +1,7 @@
 package utility;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -19,24 +20,33 @@ public class Suitebase {
 	
 	@BeforeTest
 	public void browserLaunch() throws IOException{
-		String broswer = pr.getPropertyValue("browser");
-		if(broswer.equalsIgnoreCase("Chrome")){
-			System.setProperty("webdriver.chrome.driver", ".\\Drivers\\chromedriver.exe");
-			driver = new ChromeDriver();
-			
+		try {
+			String broswer = pr.getPropertyValue("browser");
+			if(broswer.equalsIgnoreCase("Chrome")){
+				System.setProperty("webdriver.chrome.driver", ".\\Drivers\\chromedriver.exe");
+				driver = new ChromeDriver();
+				
+			}
+			else if(broswer.equalsIgnoreCase("Firefox")){
+				System.setProperty("webdriver.gecko.driver",".\\Drivers\\geckodrover.exe");
+				driver = new FirefoxDriver();
+			}
+			else if (broswer.equalsIgnoreCase("IE")){
+				System.setProperty("webdriver.ie.driver", ".\\Drivers\\IEDriverServer.exe");
+				driver = new InternetExplorerDriver();
+			}
+			else{
+				log.info("No valid browser");
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else if(broswer.equalsIgnoreCase("Firefox")){
-			System.setProperty("webdriver.gecko.driver",".\\Drivers\\geckodrover.exe");
-			driver = new FirefoxDriver();
-		}
-		else if (broswer.equalsIgnoreCase("IE")){
-			System.setProperty("webdriver.ie.driver", ".\\Drivers\\IEDriverServer.exe");
-			driver = new InternetExplorerDriver();
-		}
-		else{
-			log.info("No valid browser");
-			
-		}
+		driver.get(pr.getPropertyValue("url"));
+	    driver.manage().window().maximize();
+	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		
 		
 	}
 	

@@ -20,14 +20,6 @@ public class Login extends Suitebase {
 		page.useracclink.click();
 		page.signIn.click();
 		
-<<<<<<< HEAD
-		//Added the Data to Amol Branch
-		
-		//Added the Data to Suchita Branch
-		
-=======
-		//Addd Data to master
->>>>>>> 6ce643d8c2b6828c2fee2d5fab294d09eccf13ff
 	}
 
 }

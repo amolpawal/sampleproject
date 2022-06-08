@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 public class Loginpage {
 	
 	
-	
 	@FindBy(xpath="//a[@id='userAccountLink']")
 	public WebElement useracclink;
 	
